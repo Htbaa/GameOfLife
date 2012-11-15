@@ -25,7 +25,6 @@ public class Triangle implements Profile {
         boolean isOdd = x % 2 == 0;
         
         x = x/2;
-        y = y/2;
 
         int base_x = x * (int)size, base_y = y * (int)size;
         g2.setColor(Color.red);
