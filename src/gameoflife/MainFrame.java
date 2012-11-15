@@ -94,7 +94,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jSlider1 = new javax.swing.JSlider();
         jSliderScale = new javax.swing.JSlider();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxGridCell = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -119,7 +119,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxGridCell.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Square", "Triangle" }));
+        jComboBoxGridCell.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxGridCellItemStateChanged(evt);
+            }
+        });
 
         jButton1.setText("jButton1");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,7 +153,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jSliderScale, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxGridCell, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addContainerGap())
         );
@@ -163,7 +168,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxGridCell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -188,6 +193,19 @@ public class MainFrame extends javax.swing.JFrame {
         grid.Update();
         this.jScrollPane1.repaint();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jComboBoxGridCellItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxGridCellItemStateChanged
+        switch(jComboBoxGridCell.getSelectedItem().toString()) {
+            default:
+            case "Square":
+                grid.cellProfile = new GridCell.Square();
+                break;
+            case "Triangle":
+                grid.cellProfile = new GridCell.Triangle();
+                break;
+        }
+        this.jScrollPane1.repaint();
+    }//GEN-LAST:event_jComboBoxGridCellItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -225,7 +243,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBoxGridCell;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
