@@ -16,8 +16,6 @@ import java.util.List;
  * @author Christiaan
  */
 public class Triangle implements Profile {
-
-    double size = 20;
     
     @Override
     public void Draw(Graphics g, int x, int y) {
