@@ -24,7 +24,6 @@ public class Grid {
     
     public void Update() {
         int[][] temp = new int[maxWidth()][maxHeight()];
-        //int[][] temp = grid.clone();
         GridCoord pos = new GridCoord();
         for(int x = 0; x < maxWidth(); x++) {
             for(int y = 0; y < maxHeight(); y++) {
