@@ -41,7 +41,21 @@ public class Triangle implements Profile {
     @Override
     public List<GridCoord> GetNeighbours() {
         List<GridCoord> neighbours = new ArrayList<GridCoord>();
-        return new ArrayList<GridCoord>();
+
+        neighbours.add(new GridCoord(1, 0));
+        neighbours.add(new GridCoord(-1, 0));
+        neighbours.add(new GridCoord(-1, -1));
+        neighbours.add(new GridCoord(1, -1));
+
+        neighbours.add(new GridCoord(0, -1));
+        neighbours.add(new GridCoord(2, -1));
+        neighbours.add(new GridCoord(3, -1));
+        neighbours.add(new GridCoord(-2, 0));
+        neighbours.add(new GridCoord(2, 0));
+        neighbours.add(new GridCoord(-2, 1));
+        neighbours.add(new GridCoord(-1, -1));
+        neighbours.add(new GridCoord(0, 1));
+
+        return neighbours;
     }
-    
 }
