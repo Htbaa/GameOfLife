@@ -4,14 +4,10 @@
  */
 package gameoflife;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.Line2D;
+import java.util.Random;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 /**
  *
@@ -19,17 +15,52 @@ import javax.swing.JScrollPane;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    DrawableGrid grid;
+    
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
         
+        grid = new DrawableGrid(100, 100, new GridShape.Basic(), new GridCell.Square());
+
+        grid.grid[10][10] = 1;
+        grid.grid[11][10] = 1;
+        grid.grid[12][10] = 1;
+        
+        grid.grid[23][10] = 1;
+        grid.grid[24][10] = 1;
+        grid.grid[25][10] = 1;
+        
+        grid.grid[10][21] = 1;
+        grid.grid[11][21] = 1;
+        grid.grid[12][21] = 1;
+        grid.grid[13][31] = 1;
+        grid.grid[14][31] = 1;
+        grid.grid[15][31] = 1;
+        
+        grid.grid[60][10] = 1;
+        grid.grid[61][10] = 1;
+        grid.grid[61][11] = 1;
+        grid.grid[60][11] = 1;
+        
+        grid.grid[62][12] = 1;
+        grid.grid[63][12] = 1;
+        grid.grid[63][13] = 1;
+        grid.grid[62][13] = 1;
+        
+        Random rand = new Random(19580427);
+        for(int x = 10; x < grid.maxWidth(); x++)
+            for(int y = 10; y < grid.maxHeight(); y++)
+                if(rand.nextInt(30) == 1)
+                    grid.grid[x][y] = 1;
+        
         JPanel foobar = new JPanel() {
                 public void paintComponent( Graphics g ) {
                    super.paintComponent(g);
-                   Graphics2D g2 = (Graphics2D)g;
-                   
+                   grid.Draw(g);
+                   /*
                    double scale = (double)(jSliderScale.getValue() + 1) / 100.0;
 
                    Line2D line = new Line2D.Double(10 * scale, 10 * scale, 40 * scale, 40 * scale);
@@ -43,6 +74,7 @@ public class MainFrame extends javax.swing.JFrame {
                    g2.drawOval((int)(40 * scale), (int)(100 * scale), (int)(100 * scale), (int)(100 * scale));
                    g2.setColor(Color.PINK);
                    g2.drawOval((int)(40 * scale), (int)(500 * scale), (int)(100 * scale), (int)(100 * scale));
+                   */
                 }
            };
         //foobar.setBackground(Color.red);
@@ -63,6 +95,7 @@ public class MainFrame extends javax.swing.JFrame {
         jSlider1 = new javax.swing.JSlider();
         jSliderScale = new javax.swing.JSlider();
         jComboBox1 = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -88,6 +121,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jButton1.setText("jButton1");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -107,7 +147,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSliderScale, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -122,6 +164,8 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -138,6 +182,12 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.println(evt.getX() + "," + evt.getY());
         System.out.println(evt.getX() + this.jScrollPane1.getVerticalScrollBar().getAlignmentX() + "," + evt.getY() + this.jScrollPane1.getVerticalScrollBar().getAlignmentY());
     }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        grid.Update();
+        this.jScrollPane1.repaint();
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -174,6 +224,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
