@@ -38,7 +38,7 @@ public class MainFrame extends javax.swing.JFrame {
         updateGridTimer = new Timer(1000, updateGrid);
         this.setUpdateGridTimerFrequency();
         
-        grid = new DrawableGrid(100, 100, new GridShape.Basic(), new GridCell.Square());
+        grid = new DrawableGrid(200, 200, new GridShape.Basic(), new GridCell.Square());
 
         grid.grid[0][0] = 1;grid.grid[1][0] = 1;
         grid.grid[0][1] = 1;grid.grid[1][1] = 1;
