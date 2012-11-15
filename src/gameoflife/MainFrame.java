@@ -6,8 +6,11 @@ package gameoflife;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
@@ -16,17 +19,64 @@ import javax.swing.JPanel;
 public class MainFrame extends javax.swing.JFrame {
 
     DrawableGrid grid;
+    Timer updateGridTimer;
     
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+
+        ActionListener updateGrid = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                if(grid != null) {
+                    grid.Update();
+                    jScrollPane1.repaint();
+                }
+            }
+        };
+        updateGridTimer = new Timer(1000, updateGrid);
+        this.setUpdateGridTimerFrequency();
         
         grid = new DrawableGrid(100, 100, new GridShape.Basic(), new GridCell.Square());
 
+        grid.grid[0][0] = 1;grid.grid[1][0] = 1;
+        grid.grid[0][1] = 1;grid.grid[1][1] = 1;
+        
+        grid.grid[4][2] = 1;
+        grid.grid[4][3] = 1;
+        
         grid.grid[10][10] = 1;
         grid.grid[11][10] = 1;
+        grid.grid[12][10] = 1;
+        grid.grid[13][10] = 1;
+        grid.grid[14][10] = 1;
+        grid.grid[15][10] = 1;
+        grid.grid[10][11] = 1;
+        grid.grid[11][11] = 1;
+        grid.grid[12][11] = 1;
+        grid.grid[13][11] = 1;
+        grid.grid[14][11] = 1;
+        grid.grid[15][11] = 1;
+        grid.grid[10][12] = 1;
+        grid.grid[11][12] = 1;
+        grid.grid[12][12] = 1;
+        grid.grid[13][12] = 1;
+        grid.grid[14][12] = 1;
+        grid.grid[15][12] = 1;
+        grid.grid[10][13] = 1;
+        grid.grid[11][13] = 1;
+        grid.grid[12][13] = 1;
+        grid.grid[13][13] = 1;
+        grid.grid[14][13] = 1;
+        grid.grid[15][13] = 1;
+        grid.grid[10][14] = 1;
+        grid.grid[11][14] = 1;
+        grid.grid[12][14] = 1;
+        grid.grid[13][14] = 1;
+        grid.grid[14][14] = 1;
+        grid.grid[15][14] = 1;
+
         grid.grid[12][10] = 1;
         
         grid.grid[23][10] = 1;
@@ -82,6 +132,11 @@ public class MainFrame extends javax.swing.JFrame {
         this.jScrollPane1.setViewportView(foobar);
     }
 
+    void setUpdateGridTimerFrequency() {
+        int delay = (int)(1000.0 / this.jSliderFrequency.getValue());
+        this.updateGridTimer.setDelay(delay);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,10 +147,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jSlider1 = new javax.swing.JSlider();
+        jSliderFrequency = new javax.swing.JSlider();
         jSliderScale = new javax.swing.JSlider();
         jComboBoxGridCell = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        jButtonStartStop = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -107,6 +162,15 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jScrollPane1MouseClicked(evt);
+            }
+        });
+
+        jSliderFrequency.setMaximum(20);
+        jSliderFrequency.setMinimum(1);
+        jSliderFrequency.setValue(1);
+        jSliderFrequency.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSliderFrequencyStateChanged(evt);
             }
         });
 
@@ -126,10 +190,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonStartStop.setText("Start");
+        jButtonStartStop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                jButtonStartStopMouseClicked(evt);
             }
         });
 
@@ -148,13 +212,13 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE))
+                    .addComponent(jSliderFrequency, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jSliderScale, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxGridCell, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBoxGridCell, 0, 79, Short.MAX_VALUE)
+                    .addComponent(jButtonStartStop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -164,13 +228,13 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSliderScale, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addGap(25, 25, 25)
-                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSliderFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jComboBoxGridCell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(jButtonStartStop)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -188,11 +252,20 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.println(evt.getX() + this.jScrollPane1.getVerticalScrollBar().getAlignmentX() + "," + evt.getY() + this.jScrollPane1.getVerticalScrollBar().getAlignmentY());
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-        grid.Update();
-        this.jScrollPane1.repaint();
-    }//GEN-LAST:event_jButton1MouseClicked
+    private void jButtonStartStopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonStartStopMouseClicked
+        switch(this.jButtonStartStop.getText()) {
+            default:
+            case "Start":
+                this.updateGridTimer.start();
+                this.jButtonStartStop.setText("Stop");
+                break;
+            case "Stop":
+                this.updateGridTimer.stop();
+                this.jButtonStartStop.setText("Start");
+                break;
+        }
+        
+    }//GEN-LAST:event_jButtonStartStopMouseClicked
 
     private void jComboBoxGridCellItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxGridCellItemStateChanged
         switch(jComboBoxGridCell.getSelectedItem().toString()) {
@@ -206,6 +279,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
         this.jScrollPane1.repaint();
     }//GEN-LAST:event_jComboBoxGridCellItemStateChanged
+
+    private void jSliderFrequencyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderFrequencyStateChanged
+        this.setUpdateGridTimerFrequency();
+    }//GEN-LAST:event_jSliderFrequencyStateChanged
 
     /**
      * @param args the command line arguments
@@ -242,13 +319,13 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonStartStop;
     private javax.swing.JComboBox jComboBoxGridCell;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSlider jSlider1;
+    private javax.swing.JSlider jSliderFrequency;
     private javax.swing.JSlider jSliderScale;
     // End of variables declaration//GEN-END:variables
 }
