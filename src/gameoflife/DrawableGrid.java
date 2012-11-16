@@ -5,6 +5,7 @@
 package gameoflife;
 
 import GridShape.Profile;
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -21,6 +22,9 @@ public class DrawableGrid extends Grid {
 
     public void Draw(Graphics g) {
         for(int x = 0; x < maxWidth(); x++) {
+            g.setColor(Color.lightGray);
+            g.drawLine(x * (int)scale, 0, x * (int)scale, (int)scale * maxHeight());
+            g.drawLine(0, x * (int)scale, (int)scale * maxWidth(), x * (int)scale);
             for(int y = 0; y < maxHeight(); y++) {
                 if(grid[x][y] > 0)
                     cellProfile.Draw(g, x, y, this.scale);
