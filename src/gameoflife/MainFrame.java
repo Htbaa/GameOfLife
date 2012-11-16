@@ -20,6 +20,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     DrawableGrid grid;
     Timer updateGridTimer;
+    JPanel gridView;
     
     /**
      * Creates new form MainFrame
@@ -107,7 +108,8 @@ public class MainFrame extends javax.swing.JFrame {
                 if(rand.nextInt(30) == 1)
                     grid.grid[x][y] = 1;
         
-        JPanel foobar = new JPanel() {
+       
+        gridView = new JPanel() {
                 public void paintComponent( Graphics g ) {
                    super.paintComponent(g);
                    grid.Draw(g);
@@ -129,13 +131,21 @@ public class MainFrame extends javax.swing.JFrame {
                 }
            };
         //foobar.setBackground(Color.red);
-        foobar.setPreferredSize(new Dimension(4000, 4000));
-        this.jScrollPane1.setViewportView(foobar);
+
+        setViewSize();
+        this.jScrollPane1.setViewportView(gridView);
     }
 
     void setUpdateGridTimerFrequency() {
         int delay = (int)(1000.0 / this.jSliderFrequency.getValue());
         this.updateGridTimer.setDelay(delay);
+    }
+    
+    void setViewSize() {
+        Dimension d = new Dimension(grid.maxWidth() * (int)grid.scale, grid.maxHeight() * (int)grid.scale);
+        gridView.setSize(d);
+        gridView.setPreferredSize(d);
+        this.jScrollPane1.setPreferredSize(gridView.getPreferredSize());
     }
     
     /**
@@ -245,6 +255,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jSliderScaleStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderScaleStateChanged
         this.grid.SetScale((double)this.jSliderScale.getValue());
+        this.setViewSize();
         this.jScrollPane1.repaint();
     }//GEN-LAST:event_jSliderScaleStateChanged
 
@@ -266,7 +277,6 @@ public class MainFrame extends javax.swing.JFrame {
                 this.jButtonStartStop.setText("Start");
                 break;
         }
-        
     }//GEN-LAST:event_jButtonStartStopMouseClicked
 
     private void jComboBoxGridCellItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxGridCellItemStateChanged
