@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class Grid {
     
+    long generations = 0;
     public int[][] grid;
     GridCell.Profile cellProfile;
     GridShape.Profile gridProfile;
@@ -23,6 +24,7 @@ public class Grid {
     }
     
     public void Update() {
+        generations++;
         int[][] temp = new int[maxWidth()][maxHeight()];
         GridCoord pos = new GridCoord();
         for(int x = 0; x < maxWidth(); x++) {
