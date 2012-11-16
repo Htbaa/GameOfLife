@@ -185,7 +185,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxGridCell.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Square", "Triangle" }));
+        jComboBoxGridCell.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Square", "Triangle", "Hexagon" }));
         jComboBoxGridCell.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBoxGridCellItemStateChanged(evt);
@@ -277,6 +277,9 @@ public class MainFrame extends javax.swing.JFrame {
                 break;
             case "Triangle":
                 grid.cellProfile = new GridCell.Triangle();
+                break;
+            case "Hexagon":
+                grid.cellProfile = new GridCell.Hexagon();
                 break;
         }
         this.jScrollPane1.repaint();
