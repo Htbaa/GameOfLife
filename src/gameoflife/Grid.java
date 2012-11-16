@@ -39,12 +39,12 @@ public class Grid {
                         livingNeighbours++;
                 }
 
-                if(grid[x][y] == 0 && livingNeighbours == 3)
-                    temp[x][y] = 1;
+                if(grid[x][y] > 0 && (livingNeighbours < 2 || livingNeighbours > 3))
+                    temp[x][y] = 0;
                 else if(grid[x][y] > 0 && (livingNeighbours == 2 || livingNeighbours == 3))
                     temp[x][y] = 1 + grid[x][y];
-                else
-                    temp[x][y] = 0;
+                else if(temp[x][y] == 0 && livingNeighbours == 3)
+                    temp[x][y] = 1;
             }
         }
         grid = temp.clone();
