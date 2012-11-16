@@ -21,10 +21,18 @@ public class DrawableGrid extends Grid {
     }
 
     public void Draw(Graphics g) {
+        int gridWidth = (int)scale * maxWidth();
+        int gridHeight = (int)scale * maxHeight();
+        
+        if(cellProfile instanceof GridCell.Triangle)
+            gridWidth /= 2;
+        
         for(int x = 0; x < maxWidth(); x++) {
             g.setColor(Color.lightGray);
-            g.drawLine(x * (int)scale, 0, x * (int)scale, (int)scale * maxHeight());
-            g.drawLine(0, x * (int)scale, (int)scale * maxWidth(), x * (int)scale);
+            int x2 = x * (int)scale;
+            if(x2 < gridWidth)
+                g.drawLine(x2, 0, x2, gridHeight);
+            g.drawLine(0, x2, gridWidth, x2);
             for(int y = 0; y < maxHeight(); y++) {
                 if(grid[x][y] > 0)
                     cellProfile.Draw(g, x, y, this.scale);
