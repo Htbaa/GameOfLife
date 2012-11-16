@@ -168,7 +168,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jSliderFrequency.setMaximum(20);
         jSliderFrequency.setMinimum(1);
-        jSliderFrequency.setValue(1);
+        jSliderFrequency.setValue(10);
         jSliderFrequency.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderFrequencyStateChanged(evt);
