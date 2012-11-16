@@ -42,95 +42,18 @@ public class MainFrame extends javax.swing.JFrame {
         grid = new DrawableGrid(200, 200, new GridShape.Basic(), new GridCell.Square());
         grid.scale = this.jSliderScale.getValue();
 
-        grid.grid[0][0] = 1;grid.grid[1][0] = 1;
-        grid.grid[0][1] = 1;grid.grid[1][1] = 1;
-        
-        grid.grid[4][2] = 1;
-        grid.grid[4][3] = 1;
-        
-        grid.grid[10][10] = 1;
-        grid.grid[11][10] = 1;
-        grid.grid[12][10] = 1;
-        grid.grid[13][10] = 1;
-        grid.grid[14][10] = 1;
-        grid.grid[15][10] = 1;
-        grid.grid[10][11] = 1;
-        grid.grid[11][11] = 1;
-        grid.grid[12][11] = 1;
-        grid.grid[13][11] = 1;
-        grid.grid[14][11] = 1;
-        grid.grid[15][11] = 1;
-        grid.grid[10][12] = 1;
-        grid.grid[11][12] = 1;
-        grid.grid[12][12] = 1;
-        grid.grid[13][12] = 1;
-        grid.grid[14][12] = 1;
-        grid.grid[15][12] = 1;
-        grid.grid[10][13] = 1;
-        grid.grid[11][13] = 1;
-        grid.grid[12][13] = 1;
-        grid.grid[13][13] = 1;
-        grid.grid[14][13] = 1;
-        grid.grid[15][13] = 1;
-        grid.grid[10][14] = 1;
-        grid.grid[11][14] = 1;
-        grid.grid[12][14] = 1;
-        grid.grid[13][14] = 1;
-        grid.grid[14][14] = 1;
-        grid.grid[15][14] = 1;
-
-        grid.grid[12][10] = 1;
-        
-        grid.grid[23][10] = 1;
-        grid.grid[24][10] = 1;
-        grid.grid[25][10] = 1;
-        
-        grid.grid[10][21] = 1;
-        grid.grid[11][21] = 1;
-        grid.grid[12][21] = 1;
-        grid.grid[13][31] = 1;
-        grid.grid[14][31] = 1;
-        grid.grid[15][31] = 1;
-        
-        grid.grid[60][10] = 1;
-        grid.grid[61][10] = 1;
-        grid.grid[61][11] = 1;
-        grid.grid[60][11] = 1;
-        
-        grid.grid[62][12] = 1;
-        grid.grid[63][12] = 1;
-        grid.grid[63][13] = 1;
-        grid.grid[62][13] = 1;
-        
         Random rand = new Random(19580427);
-        for(int x = 10; x < grid.maxWidth(); x++)
-            for(int y = 10; y < grid.maxHeight(); y++)
-                if(rand.nextInt(30) == 1)
+        for(int x = 0; x < grid.maxWidth(); x++)
+            for(int y = 0; y < grid.maxHeight(); y++)
+                if(rand.nextInt(2) == 1)
                     grid.grid[x][y] = 1;
-        
        
         gridView = new JPanel() {
                 public void paintComponent( Graphics g ) {
                    super.paintComponent(g);
                    grid.Draw(g);
-                   /*
-                   double scale = (double)(jSliderScale.getValue() + 1) / 100.0;
-
-                   Line2D line = new Line2D.Double(10 * scale, 10 * scale, 40 * scale, 40 * scale);
-                   g2.setColor(Color.blue);
-                   g2.setStroke(new BasicStroke((int)(10 * scale)));
-                   g2.draw(line);
-
-                   g2.setColor(Color.orange);
-                   g2.drawOval((int)(10 * scale), (int)(10 * scale), (int)(100 * scale), (int)(100 * scale));
-                   g2.setColor(Color.LIGHT_GRAY);
-                   g2.drawOval((int)(40 * scale), (int)(100 * scale), (int)(100 * scale), (int)(100 * scale));
-                   g2.setColor(Color.PINK);
-                   g2.drawOval((int)(40 * scale), (int)(500 * scale), (int)(100 * scale), (int)(100 * scale));
-                   */
                 }
            };
-        //foobar.setBackground(Color.red);
 
         setViewSize();
         this.jScrollPane1.setViewportView(gridView);
