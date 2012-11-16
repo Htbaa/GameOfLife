@@ -28,7 +28,7 @@ public class Square implements Profile {
     }
 
     @Override
-    public List<Point> GetNeighbours() {
+    public List<Point> GetNeighbours(Point position) {
         List<Point> neighbours = new ArrayList<Point>();
 
         neighbours.add(new Point(-1, 0)); // left

@@ -49,22 +49,41 @@ public class Triangle implements Profile {
     }
 
     @Override
-    public List<Point> GetNeighbours() {
+    public List<Point> GetNeighbours(Point position) {
         List<Point> neighbours = new ArrayList<Point>();
 
-        neighbours.add(new Point(1, 0));
-        neighbours.add(new Point(-1, 0));
-        neighbours.add(new Point(-1, -1));
-        neighbours.add(new Point(1, -1));
-
-        neighbours.add(new Point(0, -1));
-        neighbours.add(new Point(2, -1));
-        neighbours.add(new Point(3, -1));
-        neighbours.add(new Point(-2, 0));
-        neighbours.add(new Point(2, 0));
-        neighbours.add(new Point(-2, 1));
-        neighbours.add(new Point(-1, -1));
-        neighbours.add(new Point(0, 1));
+        if(position.x % 2 == 0) {
+            neighbours.add(new Point(-1, -1));
+            neighbours.add(new Point(0, -1));
+            neighbours.add(new Point(1, -1));
+            neighbours.add(new Point(2, -1));
+            neighbours.add(new Point(3, -1));
+            
+            neighbours.add(new Point(-2, 0));
+            neighbours.add(new Point(-1, 0));
+            neighbours.add(new Point(1, 0));
+            neighbours.add(new Point(2, 0));
+            
+            neighbours.add(new Point(-2, 1));
+            neighbours.add(new Point(-1, -1));
+            neighbours.add(new Point(0, 1));
+        }
+        else {
+            neighbours.add(new Point(0, -1));
+            neighbours.add(new Point(1, -1));
+            neighbours.add(new Point(2, -1));
+            
+            neighbours.add(new Point(-2, 0));
+            neighbours.add(new Point(-1, 0));
+            neighbours.add(new Point(1, 0));
+            neighbours.add(new Point(2, 0));
+            
+            neighbours.add(new Point(-3, 1));
+            neighbours.add(new Point(-2, 1));
+            neighbours.add(new Point(-1, 1));
+            neighbours.add(new Point(0, 1));
+            neighbours.add(new Point(1, 1));
+        }
 
         return neighbours;
     }

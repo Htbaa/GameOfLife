@@ -17,7 +17,7 @@ public class Basic implements Profile {
 
     @Override
     public List<Point> GetNeighbours(Grid grid, GridCell.Profile cellProfile, Point position) {
-        List<Point> potentialNeighbours = cellProfile.GetNeighbours();
+        List<Point> potentialNeighbours = cellProfile.GetNeighbours(position);
         List<Point> neighbours = new ArrayList<Point>();
         
         for(Point p : potentialNeighbours) {

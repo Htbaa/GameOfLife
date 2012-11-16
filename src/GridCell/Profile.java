@@ -17,5 +17,5 @@ public interface Profile {
     
     public void Draw(Graphics g, int x, int y, double size);
     
-    public List<Point> GetNeighbours();
+    public List<Point> GetNeighbours(Point position);
 }
