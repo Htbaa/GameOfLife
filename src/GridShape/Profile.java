@@ -5,7 +5,7 @@
 package GridShape;
 
 import gameoflife.Grid;
-import gameoflife.GridCoord;
+import java.awt.Point;
 import java.util.List;
 
 /**
@@ -14,6 +14,6 @@ import java.util.List;
  */
 public interface Profile {
     
-    public List<GridCoord> GetNeighbours(Grid grid, GridCell.Profile cellProfile, GridCoord position);
+    public List<Point> GetNeighbours(Grid grid, GridCell.Profile cellProfile, Point position);
     
 }

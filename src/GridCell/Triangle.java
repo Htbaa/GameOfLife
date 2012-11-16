@@ -4,10 +4,10 @@
  */
 package GridCell;
 
-import gameoflife.GridCoord;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,22 +39,22 @@ public class Triangle implements Profile {
     }
 
     @Override
-    public List<GridCoord> GetNeighbours() {
-        List<GridCoord> neighbours = new ArrayList<GridCoord>();
+    public List<Point> GetNeighbours() {
+        List<Point> neighbours = new ArrayList<Point>();
 
-        neighbours.add(new GridCoord(1, 0));
-        neighbours.add(new GridCoord(-1, 0));
-        neighbours.add(new GridCoord(-1, -1));
-        neighbours.add(new GridCoord(1, -1));
+        neighbours.add(new Point(1, 0));
+        neighbours.add(new Point(-1, 0));
+        neighbours.add(new Point(-1, -1));
+        neighbours.add(new Point(1, -1));
 
-        neighbours.add(new GridCoord(0, -1));
-        neighbours.add(new GridCoord(2, -1));
-        neighbours.add(new GridCoord(3, -1));
-        neighbours.add(new GridCoord(-2, 0));
-        neighbours.add(new GridCoord(2, 0));
-        neighbours.add(new GridCoord(-2, 1));
-        neighbours.add(new GridCoord(-1, -1));
-        neighbours.add(new GridCoord(0, 1));
+        neighbours.add(new Point(0, -1));
+        neighbours.add(new Point(2, -1));
+        neighbours.add(new Point(3, -1));
+        neighbours.add(new Point(-2, 0));
+        neighbours.add(new Point(2, 0));
+        neighbours.add(new Point(-2, 1));
+        neighbours.add(new Point(-1, -1));
+        neighbours.add(new Point(0, 1));
 
         return neighbours;
     }

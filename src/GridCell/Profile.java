@@ -5,7 +5,7 @@
 package GridCell;
 
 import gameoflife.Grid;
-import gameoflife.GridCoord;
+import java.awt.Point;
 import java.awt.Graphics;
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface Profile {
     
     public void Draw(Graphics g, int x, int y, double size);
     
-    public List<GridCoord> GetNeighbours();
+    public List<Point> GetNeighbours();
 }

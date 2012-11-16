@@ -4,6 +4,7 @@
  */
 package gameoflife;
 
+import java.awt.Point;
 import java.util.List;
 
 /**
@@ -26,14 +27,14 @@ public class Grid {
     public void Update() {
         generations++;
         int[][] temp = new int[maxWidth()][maxHeight()];
-        GridCoord pos = new GridCoord();
+        Point pos = new Point();
         for(int x = 0; x < maxWidth(); x++) {
             for(int y = 0; y < maxHeight(); y++) {
                 pos.x = x;
                 pos.y = y;
-                List<GridCoord> neighbours = gridProfile.GetNeighbours(this, cellProfile, pos);
+                List<Point> neighbours = gridProfile.GetNeighbours(this, cellProfile, pos);
                 int livingNeighbours = 0;
-                for(GridCoord neighbour : neighbours) {
+                for(Point neighbour : neighbours) {
                     if(grid[neighbour.x][neighbour.y] > 0)
                         livingNeighbours++;
                 }
