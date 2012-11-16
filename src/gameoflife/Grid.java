@@ -41,11 +41,9 @@ public class Grid {
 
                 if(grid[x][y] == 0 && livingNeighbours == 3)
                     temp[x][y] = 1;
-                else if(grid[x][y] > 0 && livingNeighbours < 2 )
-                    temp[x][y] = 0;
                 else if(grid[x][y] > 0 && (livingNeighbours == 2 || livingNeighbours == 3))
-                    temp[x][y] += grid[x][y];
-                else if(grid[x][y] > 0 && livingNeighbours > 3)
+                    temp[x][y] = 1 + grid[x][y];
+                else
                     temp[x][y] = 0;
             }
         }
