@@ -15,10 +15,7 @@ import java.util.List;
  */
 public interface Profile {
     
-    double size = 10.0;
-    
-    public void Draw(Graphics g, int x, int y);
+    public void Draw(Graphics g, int x, int y, double size);
     
     public List<GridCoord> GetNeighbours();
-    
 }

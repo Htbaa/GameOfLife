@@ -20,12 +20,12 @@ import java.util.List;
 public class Square implements Profile {
 
     @Override
-    public void Draw(Graphics g, int x, int y) {
+    public void Draw(Graphics g, int x, int y, double size) {
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.red);
         g2.drawRect(x * (int)size, y * (int)size, (int)size, (int)size);
     }
-    
+
     @Override
     public List<GridCoord> GetNeighbours() {
         List<GridCoord> neighbours = new ArrayList<GridCoord>();
@@ -41,5 +41,5 @@ public class Square implements Profile {
         neighbours.add(new GridCoord(1, 1)); // bottomright
         
         return neighbours;
-    }    
+    }
 }

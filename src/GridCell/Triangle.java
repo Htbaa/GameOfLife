@@ -18,7 +18,7 @@ import java.util.List;
 public class Triangle implements Profile {
     
     @Override
-    public void Draw(Graphics g, int x, int y) {
+    public void Draw(Graphics g, int x, int y, double size) {
         Graphics2D g2 = (Graphics2D)g;
         boolean isOdd = x % 2 == 0;
         

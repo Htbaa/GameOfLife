@@ -39,6 +39,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.setUpdateGridTimerFrequency();
         
         grid = new DrawableGrid(200, 200, new GridShape.Basic(), new GridCell.Square());
+        grid.scale = this.jSliderScale.getValue();
 
         grid.grid[0][0] = 1;grid.grid[1][0] = 1;
         grid.grid[0][1] = 1;grid.grid[1][1] = 1;
@@ -174,9 +175,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jSliderScale.setMaximum(99);
+        jSliderScale.setMaximum(50);
+        jSliderScale.setMinimum(1);
         jSliderScale.setOrientation(javax.swing.JSlider.VERTICAL);
-        jSliderScale.setValue(100);
+        jSliderScale.setValue(10);
         jSliderScale.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderScaleStateChanged(evt);
@@ -242,7 +244,7 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jSliderScaleStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderScaleStateChanged
-        // TODO add your handling code here:
+        this.grid.SetScale((double)this.jSliderScale.getValue());
         this.jScrollPane1.repaint();
     }//GEN-LAST:event_jSliderScaleStateChanged
 

@@ -13,6 +13,8 @@ import java.awt.Graphics;
  */
 public class DrawableGrid extends Grid {
 
+    double scale = 10.0;
+    
     public DrawableGrid(int max_x, int max_y, Profile gridProfile, GridCell.Profile cellProfile) {
         super(max_x, max_y, gridProfile, cellProfile);
     }
@@ -21,8 +23,12 @@ public class DrawableGrid extends Grid {
         for(int x = 0; x < maxWidth(); x++) {
             for(int y = 0; y < maxHeight(); y++) {
                 if(grid[x][y] > 0)
-                    cellProfile.Draw(g, x, y);
+                    cellProfile.Draw(g, x, y, this.scale);
             }
         }
+    }
+    
+    public void SetScale(double scale) {
+        this.scale = scale;
     }
 }
