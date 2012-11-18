@@ -85,6 +85,7 @@ public class MainFrame extends javax.swing.JFrame {
         jSliderScale = new javax.swing.JSlider();
         jComboBoxGridCell = new javax.swing.JComboBox();
         jButtonStartStop = new javax.swing.JButton();
+        jComboBoxGridShape = new javax.swing.JComboBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -132,6 +133,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxGridShape.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Basic", "Cube", "Ring", "Sphere" }));
+        jComboBoxGridShape.setToolTipText("");
+        jComboBoxGridShape.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxGridShapeItemStateChanged(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -147,13 +156,16 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addComponent(jSliderFrequency, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE))
+                    .addComponent(jSliderFrequency, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jSliderScale, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBoxGridCell, 0, 79, Short.MAX_VALUE)
-                    .addComponent(jButtonStartStop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonStartStop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxGridShape, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBoxGridCell, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -168,7 +180,9 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jComboBoxGridCell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxGridShape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonStartStop)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -222,6 +236,25 @@ public class MainFrame extends javax.swing.JFrame {
         this.setUpdateGridTimerFrequency();
     }//GEN-LAST:event_jSliderFrequencyStateChanged
 
+    private void jComboBoxGridShapeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxGridShapeItemStateChanged
+        switch(jComboBoxGridShape.getSelectedItem().toString()) {
+            default:
+            case "Basic":
+                grid.gridProfile = new GridShape.Basic();
+                break;
+            case "Cube":
+                grid.gridProfile = new GridShape.Cube();
+                break;
+            case "Ring":
+                grid.gridProfile = new GridShape.Ring();
+                break;
+            case "Sphere":
+                grid.gridProfile = new GridShape.Sphere();
+                break;
+        }
+        this.jScrollPane1.repaint();
+    }//GEN-LAST:event_jComboBoxGridShapeItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -259,6 +292,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonStartStop;
     private javax.swing.JComboBox jComboBoxGridCell;
+    private javax.swing.JComboBox jComboBoxGridShape;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
