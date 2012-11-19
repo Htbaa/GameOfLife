@@ -57,4 +57,15 @@ public class Grid {
     public int maxHeight() {
         return this.grid[0].length;
     }
+    
+    public void MoveCells(int x1, int y1, int x2, int y2, int x3, int y3) {
+        for(int i = x1; i < x2; i++) {
+            for(int j = y1; j < y2; j++) {
+                if(x3 + i < maxWidth() && y3 + j < maxHeight()) {
+                    this.grid[x3 + i][y3 + j] = this.grid[i][j];
+                    this.grid[i][j] = 0;
+                }
+            }
+        }
+    }
 }
