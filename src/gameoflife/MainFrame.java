@@ -29,8 +29,8 @@ public class MainFrame extends javax.swing.JFrame {
     DrawableGrid grid;
     Timer updateGridTimer;
     JPanel gridView;
-    Point selectionStart
-         ,selectionEnd
+    Point selectionStart,gridSelectionStart
+         ,selectionEnd,gridSelectionEnd
          ,selectionSize;
     
     /**
@@ -65,7 +65,13 @@ public class MainFrame extends javax.swing.JFrame {
             for(int y = 0; y < grid.maxHeight(); y++)
                 if(rand.nextInt(2) == 1)
                     grid.grid[x][y] = 1;
-       
+
+        prepareGridView();
+        setViewSize();
+        this.jScrollPane1.setViewportView(gridView);
+    }
+
+    void prepareGridView() {
         gridView = new JPanel() {
                 public void paintComponent( Graphics g ) {
                    super.paintComponent(g);
@@ -87,20 +93,30 @@ public class MainFrame extends javax.swing.JFrame {
            };
 
         gridView.addMouseMotionListener(new MouseMotionListener() {
-
             @Override
             public void mouseDragged(MouseEvent e) {
                 if(selectionStart == null)
                     selectionStart = new Point(e.getX(), e.getY());
                 
+                if(gridSelectionStart == null)
+                    gridSelectionStart = new Point(e.getX(), e.getY());
+                
                 if(selectionSize != null && selectionEnd != null && e.isShiftDown()) {
-                    int width = (int)selectionSize.getX();
-                    int height = (int)selectionSize.getY();
+                    int x1 = (int)(gridSelectionStart.getX() / grid.scale);
+                    int y1 = (int)(gridSelectionStart.getY() / grid.scale);
+                    int x2 = (int)(gridSelectionEnd.getX() / grid.scale);
+                    int y2 = (int)(gridSelectionEnd.getY() / grid.scale);
+                    
+                    int width = selectionSize.x;
+                    int height = selectionSize.y;
                     selectionEnd.setLocation(e.getX() + width, e.getY() + height);
                     selectionStart.setLocation(e.getX(), e.getY());
+                    if(e.isAltDown())
+                        grid.CopyCells(x1, y1, x2, y2, (int)(selectionStart.x / grid.scale), (int)(selectionStart.y / grid.scale));
                 }
                 else {
                     selectionEnd = new Point(e.getX(), e.getY());
+                    gridSelectionEnd = new Point(e.getX(), e.getY());
                     int startX = (int)selectionStart.getX();
                     int startY = (int)selectionStart.getY();
                     int width = (int)selectionEnd.getX() - startX;
@@ -118,7 +134,8 @@ public class MainFrame extends javax.swing.JFrame {
         gridView.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                selectionStart = selectionEnd = selectionSize = null;
+                selectionStart = selectionEnd = selectionSize
+                        = gridSelectionStart = gridSelectionEnd = null;
                 repaint();
             }
 
@@ -138,11 +155,8 @@ public class MainFrame extends javax.swing.JFrame {
             public void mouseExited(MouseEvent e) {
             }
         });
-        
-        setViewSize();
-        this.jScrollPane1.setViewportView(gridView);
     }
-
+    
     void setUpdateGridTimerFrequency() {
         int delay = (int)(1000.0 / this.jSliderFrequency.getValue());
         this.updateGridTimer.setDelay(delay);
