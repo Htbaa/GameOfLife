@@ -50,7 +50,7 @@ public class MainFrame extends javax.swing.JFrame {
         updateGridTimer = new Timer(1000, updateGrid);
         this.setUpdateGridTimerFrequency();
         
-        grid = new DrawableGrid(200, 200, new GridShape.Basic(), new GridCell.Square());
+        grid = new DrawableGrid(200, 200, new GridShape.Basic(), new GridCell.DrawableSquare());
         grid.scale = this.jSliderScale.getValue();
 
         Random rand = new Random(19580427);
@@ -286,13 +286,13 @@ public class MainFrame extends javax.swing.JFrame {
         switch(jComboBoxGridCell.getSelectedItem().toString()) {
             default:
             case "Square":
-                grid.cellProfile = new GridCell.Square();
+                grid.cellProfile = new GridCell.DrawableSquare();
                 break;
             case "Triangle":
-                grid.cellProfile = new GridCell.Triangle();
+                grid.cellProfile = new GridCell.DrawableTriangle();
                 break;
             case "Hexagon":
-                grid.cellProfile = new GridCell.Hexagon();
+                grid.cellProfile = new GridCell.DrawableHexagon();
                 break;
         }
         this.jScrollPane1.repaint();

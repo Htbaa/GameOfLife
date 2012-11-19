@@ -4,9 +4,6 @@
  */
 package GridCell;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +12,7 @@ import java.util.List;
  *
  * @author Christiaan
  */
-public class Square implements Profile, Drawable {
-
-    @Override
-    public void Draw(Graphics g, int x, int y, double size) {
-        Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.black);
-        g2.fillRect(x * (int)size, y * (int)size, (int)size, (int)size);
-        g2.setColor(Color.red);
-        g2.drawRect(x * (int)size, y * (int)size, (int)size, (int)size);
-        
-    }
+public class Square implements Profile {
 
     @Override
     public List<Point> GetNeighbours(Point position) {

@@ -16,8 +16,10 @@ public class DrawableGrid extends Grid {
 
     double scale = 10.0;
     
-    public DrawableGrid(int max_x, int max_y, Profile gridProfile, GridCell.Profile cellProfile) {
+    public DrawableGrid(int max_x, int max_y, Profile gridProfile, GridCell.Profile cellProfile) throws Exception {
         super(max_x, max_y, gridProfile, cellProfile);
+        if(!(cellProfile instanceof GridCell.Drawable))
+            throw new Exception("cellProfile should implement GridCell.Drawable interface");
     }
 
     public void Draw(Graphics g) {
