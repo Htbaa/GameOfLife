@@ -50,7 +50,14 @@ public class MainFrame extends javax.swing.JFrame {
         updateGridTimer = new Timer(1000, updateGrid);
         this.setUpdateGridTimerFrequency();
         
-        grid = new DrawableGrid(200, 200, new GridShape.Basic(), new GridCell.DrawableSquare());
+        try {
+            grid = new DrawableGrid(200, 200, new GridShape.Basic(), new GridCell.DrawableSquare());
+        }
+        catch(Exception ex) {
+            System.err.println(ex.getMessage());
+            this.dispose();
+            return;
+        }
         grid.scale = this.jSliderScale.getValue();
 
         Random rand = new Random(19580427);
