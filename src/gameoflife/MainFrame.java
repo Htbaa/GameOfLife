@@ -4,10 +4,18 @@
  */
 package gameoflife;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -21,6 +29,9 @@ public class MainFrame extends javax.swing.JFrame {
     DrawableGrid grid;
     Timer updateGridTimer;
     JPanel gridView;
+    Point selectionStart
+         ,selectionEnd
+         ,selectionSize;
     
     /**
      * Creates new form MainFrame
@@ -52,9 +63,75 @@ public class MainFrame extends javax.swing.JFrame {
                 public void paintComponent( Graphics g ) {
                    super.paintComponent(g);
                    grid.Draw(g);
+                   
+                   if(selectionStart != null && selectionSize != null) {
+                       Graphics2D g2 = (Graphics2D)g;
+                       g2.setColor(Color.orange);
+                       Composite c = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .5f);
+                       g2.setComposite(c);
+                       int startX = (int)selectionStart.getX();
+                       int startY = (int)selectionStart.getY();
+                       int width = (int)selectionSize.getX();
+                       int height = (int)selectionSize.getY();
+                       g2.drawRect(startX, startY, width, height);
+                       g2.fillRect(startX, startY, width, height);
+                   }
                 }
            };
 
+        gridView.addMouseMotionListener(new MouseMotionListener() {
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if(selectionStart == null)
+                    selectionStart = new Point(e.getX(), e.getY());
+                
+                if(selectionSize != null && selectionEnd != null && e.isShiftDown()) {
+                    int width = (int)selectionSize.getX();
+                    int height = (int)selectionSize.getY();
+                    selectionEnd.setLocation(e.getX() + width, e.getY() + height);
+                    selectionStart.setLocation(e.getX(), e.getY());
+                }
+                else {
+                    selectionEnd = new Point(e.getX(), e.getY());
+                    int startX = (int)selectionStart.getX();
+                    int startY = (int)selectionStart.getY();
+                    int width = (int)selectionEnd.getX() - startX;
+                    int height = (int)selectionEnd.getY() - startY;
+                    selectionSize = new Point(width, height);
+                }
+                repaint();
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+            }
+        });
+        
+        gridView.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                selectionStart = selectionEnd = selectionSize = null;
+                repaint();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+        
         setViewSize();
         this.jScrollPane1.setViewportView(gridView);
     }
@@ -94,11 +171,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jScrollPane1MouseClicked(evt);
-            }
-        });
 
         jSliderFrequency.setMaximum(20);
         jSliderFrequency.setMinimum(1);
@@ -195,12 +267,6 @@ public class MainFrame extends javax.swing.JFrame {
         this.setViewSize();
         this.jScrollPane1.repaint();
     }//GEN-LAST:event_jSliderScaleStateChanged
-
-    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
-        // TODO add your handling code here:
-        System.out.println(evt.getX() + "," + evt.getY());
-        System.out.println(evt.getX() + this.jScrollPane1.getVerticalScrollBar().getAlignmentX() + "," + evt.getY() + this.jScrollPane1.getVerticalScrollBar().getAlignmentY());
-    }//GEN-LAST:event_jScrollPane1MouseClicked
 
     private void jButtonStartStopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonStartStopMouseClicked
         switch(this.jButtonStartStop.getText()) {
