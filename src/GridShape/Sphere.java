@@ -41,15 +41,19 @@ public class Sphere implements Profile {
                 y -= grid.maxHeight();
             }
             
-            if(x < 0)
-                x += grid.maxWidth();
-            else if(x >= grid.maxWidth())
-                x -= grid.maxWidth();
+            while(x < 0 || x >= grid.maxWidth()) {
+                if(x < 0)
+                    x += grid.maxWidth();
+                else if(x >= grid.maxWidth())
+                    x -= grid.maxWidth();
+            }
 
-            if(y < 0)
-                y += grid.maxHeight();
-            else if(y >= grid.maxHeight())
-                y -= grid.maxHeight();
+            while(y < 0 || y >= grid.maxHeight()) {
+                if(y < 0)
+                    y += grid.maxHeight();
+                else if(y >= grid.maxHeight())
+                    y -= grid.maxHeight();
+            }
             
             neighbours.add(new Point(x,y));
         }
