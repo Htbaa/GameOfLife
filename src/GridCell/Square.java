@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Christiaan
  */
-public class Square implements Profile {
+public class Square implements Profile, Drawable {
 
     @Override
     public void Draw(Graphics g, int x, int y, double size) {

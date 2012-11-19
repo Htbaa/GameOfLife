@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Christiaan
  */
-public class Hexagon implements Profile {
+public class Hexagon implements Profile, Drawable {
 
     @Override
     public void Draw(Graphics g, int x, int y, double size) {

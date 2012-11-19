@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Christiaan
  */
-public class Triangle implements Profile {
+public class Triangle implements Profile, Drawable {
     
     @Override
     public void Draw(Graphics g, int x, int y, double size) {

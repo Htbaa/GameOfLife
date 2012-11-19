@@ -4,14 +4,12 @@
  */
 package GridCell;
 
-import java.awt.Point;
-import java.util.List;
+import java.awt.Graphics;
 
 /**
  *
  * @author Christiaan
  */
-public interface Profile {
-
-    public List<Point> GetNeighbours(Point position);
+public interface Drawable {
+    public void Draw(Graphics g, int x, int y, double size);
 }
