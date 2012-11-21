@@ -1,29 +1,51 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gameoflife;
 
 import java.awt.Point;
 import java.util.List;
 
 /**
- *
+ * A general 2D grid for Game of Life
+ * 
  * @author Christiaan
  */
 public class Grid {
-    
+
+    /**
+     * Counter that keeps track of the number of generations
+     */
     long generations = 0;
-    public int[][] grid;
-    GridCell.Profile cellProfile;
-    GridShape.Profile gridProfile;
     
+    /**
+     * The actual grid itself
+     */
+    public int[][] grid;
+    
+    /**
+     * Cell profile that determines the shape of a cell
+     */
+    GridCell.Profile cellProfile;
+    
+    /**
+     * Grid profile that determines what the neighbours of a cell are
+     */
+    GridShape.Profile gridProfile;
+   
+    /**
+     * Constructor
+     * @param max_x Max number of columns
+     * @param max_y Max number of rows
+     * @param gridProfile GridShape.Profile to use
+     * @param cellProfile GridCell.Profile to use
+     */
     public Grid(int max_x, int max_y, GridShape.Profile gridProfile, GridCell.Profile cellProfile) {
         this.grid = new int[max_x][max_y];
         this.gridProfile = gridProfile;
         this.cellProfile = cellProfile;
     }
     
+    /**
+     * Update to generate next generation
+     */
     public void Update() {
         generations++;
         int[][] temp = new int[maxWidth()][maxHeight()];
@@ -50,14 +72,31 @@ public class Grid {
         grid = temp.clone();
     }
     
+    /**
+     * get maximum width of grid
+     * @return int
+     */
     public int maxWidth() {
         return this.grid.length;
     }
     
+    /**
+     * get maximum height of grid
+     * @return int
+     */    
     public int maxHeight() {
         return this.grid[0].length;
     }
     
+    /**
+     * Move cells from x1,y1 to x2,y2 to position x3,y3
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @param x3
+     * @param y3 
+     */
     public void CopyCells(int x1, int y1, int x2, int y2, int x3, int y3) {
         for(int i = x1; i <= x2; i++)
             for(int j = y1; j <= y2; j++)

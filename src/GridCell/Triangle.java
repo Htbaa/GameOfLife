@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Triangle - a 3 sided shape
  * @author Christiaan
  */
 public class Triangle implements Profile {

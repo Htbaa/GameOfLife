@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GridCell;
 
 import java.awt.Color;
@@ -9,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 /**
- *
+ * Drawable implementation of a Square
  * @author Christiaan
  */
 public class DrawableSquare extends Square implements Drawable {

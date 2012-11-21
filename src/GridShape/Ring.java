@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * A ring representation of a grid - cells can move out of x bounds, but not out
+ * of y bounds
  * @author Christiaan
  */
 public class Ring implements Profile {

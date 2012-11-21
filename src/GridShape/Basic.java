@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GridShape;
 
 import gameoflife.Grid;
@@ -10,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * A basic square grid - cells can't move across the grid's border
  * @author Christiaan
  */
 public class Basic implements Profile {

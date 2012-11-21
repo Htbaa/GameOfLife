@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * A representation of a sphere - cells that move out of bounds will end up on
+ * the other side
  * @author Christiaan
  */
 public class Sphere implements Profile {

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GridShape;
 
 import gameoflife.Grid;
@@ -10,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * A cubical representation of the grid - cells can move across borders to
+ * end up on the other side of the grid
  * @author Christiaan
  */
 public class Cube implements Profile {

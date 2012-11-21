@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Square - a 4 sided shape
  * @author Christiaan
  */
 public class Square implements Profile {
