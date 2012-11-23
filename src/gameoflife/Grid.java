@@ -13,7 +13,7 @@ public class Grid {
     /**
      * Counter that keeps track of the number of generations
      */
-    long generations = 0;
+    public long generations = 0;
     
     /**
      * The actual grid itself
@@ -23,12 +23,12 @@ public class Grid {
     /**
      * Cell profile that determines the shape of a cell
      */
-    GridCell.Profile cellProfile;
+    protected GridCell.Profile cellProfile;
     
     /**
      * Grid profile that determines what the neighbours of a cell are
      */
-    GridShape.Profile gridProfile;
+    protected GridShape.Profile gridProfile;
    
     /**
      * Constructor
@@ -102,5 +102,21 @@ public class Grid {
             for(int j = y1; j <= y2; j++)
                 if(x3 + i - x1 < maxWidth() && y3 + j - y1 < maxHeight())
                     this.grid[x3 + i - x1][y3 + j - y1 ] = this.grid[i][j];
+    }
+    
+    /**
+     * Change the current cellProfile
+     * @param cellProfile 
+     */
+    public void setCellProfile(GridCell.Profile cellProfile) {
+        this.cellProfile = cellProfile;
+    }
+    
+    /**
+     * Change the current gridProfile
+     * @param gridProfile 
+     */
+    public void setGridProfile(GridShape.Profile gridProfile) {
+        this.gridProfile = gridProfile;
     }
 }

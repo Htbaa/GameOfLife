@@ -316,13 +316,13 @@ public class MainFrame extends javax.swing.JFrame {
         switch(jComboBoxGridCell.getSelectedItem().toString()) {
             default:
             case "Square":
-                grid.cellProfile = new GridCell.DrawableSquare();
+                grid.setCellProfile(new GridCell.DrawableSquare());
                 break;
             case "Triangle":
-                grid.cellProfile = new GridCell.DrawableTriangle();
+                grid.setCellProfile(new GridCell.DrawableTriangle());
                 break;
             case "Hexagon":
-                grid.cellProfile = new GridCell.DrawableHexagon();
+                grid.setCellProfile(new GridCell.DrawableHexagon());
                 break;
         }
         this.jScrollPane1.repaint();
@@ -336,16 +336,16 @@ public class MainFrame extends javax.swing.JFrame {
         switch(jComboBoxGridShape.getSelectedItem().toString()) {
             default:
             case "Basic":
-                grid.gridProfile = new GridShape.Basic();
+                grid.setGridProfile(new GridShape.Basic());
                 break;
             case "Cube":
-                grid.gridProfile = new GridShape.Cube();
+                grid.setGridProfile(new GridShape.Cube());
                 break;
             case "Ring":
-                grid.gridProfile = new GridShape.Ring();
+                grid.setGridProfile(new GridShape.Ring());
                 break;
             case "Sphere":
-                grid.gridProfile = new GridShape.Sphere();
+                grid.setGridProfile(new GridShape.Sphere());
                 break;
         }
         this.jScrollPane1.repaint();
