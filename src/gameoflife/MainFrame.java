@@ -71,6 +71,9 @@ public class MainFrame extends javax.swing.JFrame {
         this.jScrollPane1.setViewportView(gridView);
     }
 
+    /**
+     * Adds and prepares the drawable JPanel on which the grid will be drawn
+     */
     void prepareGridView() {
         gridView = new JPanel() {
                 public void paintComponent( Graphics g ) {
@@ -157,11 +160,17 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * Update frequency of the timer that periodically updates the grid
+     */
     void setUpdateGridTimerFrequency() {
         int delay = (int)(1000.0 / this.jSliderFrequency.getValue());
         this.updateGridTimer.setDelay(delay);
     }
     
+    /**
+     * Resize scrollbars of drawable area
+     */
     void setViewSize() {
         Dimension d = new Dimension(grid.maxWidth() * (int)grid.scale, grid.maxHeight() * (int)grid.scale);
         gridView.setSize(d);
