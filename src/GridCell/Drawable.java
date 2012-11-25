@@ -15,5 +15,5 @@ public interface Drawable {
      * @param y y-position
      * @param size size of shape
      */
-    public void Draw(Graphics g, int x, int y, double size);
+    public void Draw(Graphics g, int x, int y, double size, int age);
 }

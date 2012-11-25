@@ -13,7 +13,7 @@ import java.awt.Polygon;
 public class DrawableTriangle extends Triangle implements Drawable {
     
     @Override
-    public void Draw(Graphics g, int x, int y, double size) {
+    public void Draw(Graphics g, int x, int y, double size, int age) {
         Graphics2D g2 = (Graphics2D)g;
         boolean isOdd = x % 2 == 0;
         
@@ -36,7 +36,12 @@ public class DrawableTriangle extends Triangle implements Drawable {
         int[] xs = { p1.x, p2.x, p3.x };
         int[] ys = { p1.y, p2.y, p3.y };
         Polygon triangle = new Polygon(xs, ys, xs.length);
-        g2.setColor(Color.black);
+        int rgb = 255 - age;
+        if(rgb < 0)
+            rgb = 0;
+        Color c = new Color(rgb, rgb, 0);
+        g2.setColor(c);
+        g2.setColor(c);
         g2.fillPolygon(triangle);
         g2.setColor(Color.red);
         g2.drawPolygon(triangle);

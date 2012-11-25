@@ -52,7 +52,7 @@ public class DrawableGrid extends Grid {
             g.drawLine(0, x2, gridWidth, x2);
             for(int y = 0; y < maxHeight(); y++) {
                 if(grid[x][y] > 0 && cellProfile instanceof GridCell.Drawable)
-                    ((GridCell.Drawable)cellProfile).Draw(g, x, y, this.scale);
+                    ((GridCell.Drawable)cellProfile).Draw(g, x, y, this.scale, grid[x][y]);
             }
         }
     }
