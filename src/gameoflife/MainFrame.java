@@ -32,6 +32,7 @@ public class MainFrame extends javax.swing.JFrame {
     Point selectionStart,gridSelectionStart
          ,selectionEnd,gridSelectionEnd
          ,selectionSize;
+    private Random rand = new Random(19580427);
     
     /**
      * Creates new form MainFrame
@@ -60,15 +61,22 @@ public class MainFrame extends javax.swing.JFrame {
         }
         grid.scale = this.jSliderScale.getValue();
 
-        Random rand = new Random(19580427);
-        for(int x = 0; x < grid.maxWidth(); x++)
-            for(int y = 0; y < grid.maxHeight(); y++)
-                if(rand.nextInt(2) == 1)
-                    grid.grid[x][y] = 1;
+        randomizeGrid();
 
         prepareGridView();
         setViewSize();
         this.jScrollPane1.setViewportView(gridView);
+    }
+    
+    /**
+     * Reset grid and randomly fill it
+     */
+    private void randomizeGrid() {
+        grid.Reset();
+        for(int x = 0; x < grid.maxWidth(); x++)
+            for(int y = 0; y < grid.maxHeight(); y++)
+                if(rand.nextInt(2) == 1)
+                    grid.grid[x][y] = 1;
     }
 
     /**
@@ -178,6 +186,12 @@ public class MainFrame extends javax.swing.JFrame {
         this.jScrollPane1.setPreferredSize(gridView.getPreferredSize());
     }
     
+    private void DrawFigure(int[][] positions) {
+        grid.Reset();
+        grid.PopulateCells(positions);
+        this.jScrollPane1.repaint();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -195,14 +209,20 @@ public class MainFrame extends javax.swing.JFrame {
         jComboBoxGridShape = new javax.swing.JComboBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItemFigureMountingBlock = new javax.swing.JMenuItem();
+        jMenuItemFigureGliderBomb = new javax.swing.JMenuItem();
+        jMenuItemFigureArch = new javax.swing.JMenuItem();
+        jMenuItemFigureSpaceship = new javax.swing.JMenuItem();
+        jMenuItemFigureExplosion = new javax.swing.JMenuItem();
+        jMenuItemFigureLongLine = new javax.swing.JMenuItem();
+        jMenuItemFigureRandomize = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        jSliderFrequency.setMaximum(20);
+        jSliderFrequency.setMaximum(200);
         jSliderFrequency.setMinimum(1);
         jSliderFrequency.setValue(10);
         jSliderFrequency.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -243,11 +263,65 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jMenu1.setText("Figures");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenuItemFigureMountingBlock.setText("Mounting Block");
+        jMenuItemFigureMountingBlock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFigureMountingBlockActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemFigureMountingBlock);
+
+        jMenuItemFigureGliderBomb.setText("Glider Bomb");
+        jMenuItemFigureGliderBomb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFigureGliderBombActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemFigureGliderBomb);
+
+        jMenuItemFigureArch.setText("Arch");
+        jMenuItemFigureArch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFigureArchActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemFigureArch);
+
+        jMenuItemFigureSpaceship.setText("Spaceship");
+        jMenuItemFigureSpaceship.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFigureSpaceshipActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemFigureSpaceship);
+
+        jMenuItemFigureExplosion.setText("Explosion");
+        jMenuItemFigureExplosion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFigureExplosionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemFigureExplosion);
+
+        jMenuItemFigureLongLine.setText("Long Line");
+        jMenuItemFigureLongLine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFigureLongLineActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemFigureLongLine);
+
+        jMenuItemFigureRandomize.setText("Randomize");
+        jMenuItemFigureRandomize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFigureRandomizeActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemFigureRandomize);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -351,6 +425,71 @@ public class MainFrame extends javax.swing.JFrame {
         this.jScrollPane1.repaint();
     }//GEN-LAST:event_jComboBoxGridShapeItemStateChanged
 
+    private void jMenuItemFigureMountingBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFigureMountingBlockActionPerformed
+        int[][] positions = new int[][] {
+            new int[] {101,100},
+            new int[] {100,101}, new int[] {101,101}, new int[] {102,101},
+            new int[] {100,102}, new int[] {102,102}, new int[] {103,102},
+        };
+        DrawFigure(positions);
+    }//GEN-LAST:event_jMenuItemFigureMountingBlockActionPerformed
+
+    private void jMenuItemFigureGliderBombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFigureGliderBombActionPerformed
+        int[][] positions = new int[][] {
+            new int[] {102,100}, new int[] {103,100}, new int[] {105,100}, new int[] {106,100},
+            new int[] {101,101}, new int[] {103,101}, new int[] {105,101}, new int[] {107,101},
+            new int[] {100,102}, new int[] {101,102}, new int[] {103,102}, new int[] {105,102}, new int[] {107,102}, new int[] {108,102},
+            new int[] {101,103}, new int[] {103,103}, new int[] {105,103}, new int[] {107,103},
+            new int[] {102,104}, new int[] {103,104}, new int[] {105,104}, new int[] {106,104},
+        };
+        DrawFigure(positions);
+    }//GEN-LAST:event_jMenuItemFigureGliderBombActionPerformed
+
+    private void jMenuItemFigureArchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFigureArchActionPerformed
+        int[][] positions = new int[][] {
+            new int[] {100,100}, new int[] {101,100}, new int[] {102,100},
+            new int[] {100,101}, new int[] {102,101},
+            new int[] {100,102}, new int[] {102,102},
+        };
+        DrawFigure(positions);
+    }//GEN-LAST:event_jMenuItemFigureArchActionPerformed
+
+    private void jMenuItemFigureSpaceshipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFigureSpaceshipActionPerformed
+        int[][] positions = new int[][] {
+            new int[] {103,100},
+            new int[] {104,101},
+            new int[] {100,102}, new int[] {104,102},
+            new int[] {101,103}, new int[] {102,103}, new int[] {103,103}, new int[] {104,103},
+        };
+        DrawFigure(positions);
+    }//GEN-LAST:event_jMenuItemFigureSpaceshipActionPerformed
+
+    private void jMenuItemFigureExplosionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFigureExplosionActionPerformed
+        int[][] positions = new int[][] {
+            new int[] {101,100}, new int[] {102,100},
+            new int[] {100,101}, new int[] {101,101},
+            new int[] {101,102},
+        };
+        DrawFigure(positions);
+    }//GEN-LAST:event_jMenuItemFigureExplosionActionPerformed
+
+    private void jMenuItemFigureLongLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFigureLongLineActionPerformed
+        int[][] positions = new int[grid.maxWidth()][2];
+        int quarter = positions.length / 4;
+        for(int x = 0; x < positions.length - quarter; x++) {
+            positions[x] = new int[]{x,120};
+        }
+        for(int x = positions.length - quarter; x < positions.length; x++) {
+            positions[x] = new int[]{x,100};
+        }
+        DrawFigure(positions);
+    }//GEN-LAST:event_jMenuItemFigureLongLineActionPerformed
+
+    private void jMenuItemFigureRandomizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFigureRandomizeActionPerformed
+        randomizeGrid();
+        this.jScrollPane1.repaint();
+    }//GEN-LAST:event_jMenuItemFigureRandomizeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -390,8 +529,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxGridCell;
     private javax.swing.JComboBox jComboBoxGridShape;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemFigureArch;
+    private javax.swing.JMenuItem jMenuItemFigureExplosion;
+    private javax.swing.JMenuItem jMenuItemFigureGliderBomb;
+    private javax.swing.JMenuItem jMenuItemFigureLongLine;
+    private javax.swing.JMenuItem jMenuItemFigureMountingBlock;
+    private javax.swing.JMenuItem jMenuItemFigureRandomize;
+    private javax.swing.JMenuItem jMenuItemFigureSpaceship;
     public javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSliderFrequency;
     private javax.swing.JSlider jSliderScale;

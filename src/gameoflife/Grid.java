@@ -119,4 +119,21 @@ public class Grid {
     public void setGridProfile(GridShape.Profile gridProfile) {
         this.gridProfile = gridProfile;
     }
+    
+    /**
+     * Empty grid
+     */
+    public void Reset() {
+        this.grid = new int[maxWidth()][maxHeight()];
+    }
+    
+    /**
+     * Populate cells
+     * @param xy 
+     */
+    public void PopulateCells(int[][] xy) {
+        for(int[] a : xy) {
+            this.grid[a[0]][a[1]] = 1;
+        }
+    }
 }
